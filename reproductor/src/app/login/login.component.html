@@ -1,0 +1,65 @@
+<div class="div-login">
+  <div class="form-grup"></div>
+
+  <form [formGroup]="loginForms">
+    <div class="form-grup">
+      <label for="exampleFormControlInput1" class="form-label">Email</label>
+      <input
+        type="email"
+        class="form-control-login"
+        id="email"
+        placeholder="name@example.com"
+        formControlName="email"
+        required
+        />
+    </div>
+    <div
+      class="alert alert-danger"
+      *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+      <li *ngIf="email?.hasError('required')">El campo es requerido</li>
+      <li *ngIf="email?.hasError('email')">Ingrese un email correcto</li>
+    </div>
+    <div class="form-grup">
+      <label for="exampleFormControlInput1" class="form-label">Password</label>
+      <input
+        type="password"
+        class="form-control-login"
+        id="password"
+        formControlName="password"
+        required
+        />
+    </div>
+    <div
+      class="alert alert-danger"
+      *ngIf="loginForms.controls['password'].invalid && (loginForms.controls['password'].dirty || loginForms.controls['password'].touched)">
+      
+      <li class="col validation" [ngClass]="loginForms.controls['password'].hasError('required') || loginForms.controls['password'].hasError('minlength')  ? 'text-danger' : 'text-success'">
+        Minimo de 8 caracteres
+      </li>
+      <li class="col validation" [ngClass]="loginForms.controls['password'].hasError('required') || loginForms.controls['password'].hasError('hasNumber')  ? 'text-danger' : 'text-success'">
+        ¡Debe contener al menos 1 número!
+      </li>
+      <li class="col validation" [ngClass]="loginForms.controls['password'].hasError('required') || loginForms.controls['password'].hasError('hasCapitalCase')  ? 'text-danger' : 'text-success'">
+          ¡Debe contener al menos 1 en mayúsculas!
+      </li>
+      <li class="col validation" [ngClass]="loginForms.controls['password'].hasError('required') || loginForms.controls['password'].hasError('hasSmallCase')  ? 'text-danger' : 'text-success'">
+          ¡Debe contener al menos 1 letra en minúscula!
+      </li>
+      <li class="col validation" [ngClass]="loginForms.controls['password'].hasError('required') || loginForms.controls['password'].hasError('hasSpecialCharacters') ? 'text-danger' : 'text-success'">
+        
+          ¡Debe contener al menos 1 personaje especial!
+      </li>
+
+    </div>
+    
+    <button type="submit" class="btn-login" (click)="onSubmit()"
+      [disabled]="loginForms.invalid || loginForms.untouched"
+      [title]="loginForms.invalid || loginForms.untouched ? 'Campos incompletos'
+      : 'Campos incompletos'">
+      Inciar sesion
+    </button>
+  </form>
+  <div>
+
+  </div>
+</div>
