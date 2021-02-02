@@ -1,7 +1,7 @@
 <div class="div-login">
   <div class="form-grup"></div>
 
-  <form [formGroup]="loginForms">
+  <form [formGroup]="loginForms" (ngSubmit)="onSubmit()">
     <div class="form-grup">
       <label for="exampleFormControlInput1" class="form-label">Email</label>
       <input
@@ -15,9 +15,9 @@
     </div>
     <div
       class="alert alert-danger"
-      *ngIf="email?.invalid && (email?.dirty || email?.touched)">
-      <li *ngIf="email?.hasError('required')">El campo es requerido</li>
-      <li *ngIf="email?.hasError('email')">Ingrese un email correcto</li>
+      *ngIf="loginForms.controls['email'].invalid && (loginForms.controls['email'].dirty || loginForms.controls['email'].touched)">
+      <li *ngIf="loginForms.controls['email'].hasError('required')">El campo es requerido</li>
+      <li *ngIf="loginForms.controls['email'].hasError('email')">Ingrese un email correcto</li>
     </div>
     <div class="form-grup">
       <label for="exampleFormControlInput1" class="form-label">Password</label>
@@ -52,7 +52,7 @@
 
     </div>
     
-    <button type="submit" class="btn-login" (click)="onSubmit()"
+    <button type="submit" class="btn-login" 
       [disabled]="loginForms.invalid || loginForms.untouched"
       [title]="loginForms.invalid || loginForms.untouched ? 'Campos incompletos'
       : 'Campos incompletos'">

@@ -107,7 +107,7 @@ function updateUser(req, res){
     let userId = req.params.id;
     let update = req.body;
 
-    User.useFindAndModify(userId, update, (err, userUpdated) => {
+    User.findByIdAndUpdate(userId, update,{useFindAndModify: false}, (err, userUpdated) => {
         if(err){
             res.status(500).send({ message : "Error al actulizar el usuario" })
         }else{
