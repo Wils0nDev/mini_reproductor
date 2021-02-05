@@ -50,3 +50,18 @@
     font-weight: bold;
     cursor: pointer;
   }
+
+  button.btn-login:disabled {
+    background-color: #a7e0cb;
+    cursor: no-drop;
+}
+  .validation {
+    font-size: 12px;
+
+  }
+  li.col.validation.text-danger {
+    font-size: 12px;
+  }
+  li.col.validation.text-success {
+    font-size: 12px;
+  }

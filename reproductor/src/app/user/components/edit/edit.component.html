@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="col">
+    </div>
+    <div class="col-6">
+        <form [formGroup]="updateRegister" (ngSubmit)="onSubmit()">
+
+            <div class="mb-3">
+                <label for="name" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="name"
+                formControlName="name" required>
+            </div>
+            <div
+                class="alert alert-danger"
+                *ngIf="updateRegister.controls['name'].invalid &&
+                (updateRegister.controls['name'].dirty ||
+                updateRegister.controls['name'].touched)">
+                <li class="validation"
+                    *ngIf="updateRegister.controls['name'].hasError('required')">
+                    El campo es requerido
+                </li>
+            </div>
+            <div class="mb-3">
+                <label for="surname" class="form-label">Apellidos</label>
+                <input type="surname" class="form-control" id="surname" formControlName="surname"> 
+            </div>
+            <div
+                class="alert alert-danger"
+                *ngIf="updateRegister.controls['surname'].invalid &&
+                (updateRegister.controls['surname'].dirty ||
+                updateRegister.controls['surname'].touched)">
+                <li class="validation"
+                    *ngIf="updateRegister.controls['surname'].hasError('required')">
+                    El campo es requerido
+                </li>
+            </div>
+            <div class="mb-3">
+                <label for="imagePerfil" class="form-label">Imagen de perfil</label>
+                <input type="file" class="form-control" id="imagePerfil" formControlName="image">
+            </div>
+            <button type="submit" class="btn btn-primary" >Actulizar</button>
+        </form>
+    </div>
+    <div class="col">
+    </div>
+</div>

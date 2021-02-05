@@ -37,14 +37,19 @@ function saveUser(req, res) {
                     //guardar el usuario
                     user.save((err, userStored) => {
                         if(err){
-                            res.status(500).send({ message: 'Error al guardar usuario' })
+                            if(err.keyPattern.email > 0)
+                                res.status(500).send({ message : 'El correo ya existe' })
+                            else
+                                res.status(500).send({ message : 'No se pudo registrar al usuario' })
+
                         }else{
                             if(!userStored){
                                 res.status(404).send({ message: 'No se registro el usuario' })
                             }else{
                                 res.status(200).send({
                                      user : userStored,
-                                     message: 'Usuario registrado' 
+                                     message: 'Usuario registrado',
+                                     status : 200
                                     })
 
                             }
@@ -93,7 +98,7 @@ function loginUser(req, res){
                         }
                     }else{
                         res.status(404).send({
-                            message : "El usuario no ha podido loguearse"
+                            message : "Usuario o contraseña incorrecta"
                         })
                     }
                 })

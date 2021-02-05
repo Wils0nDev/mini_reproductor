@@ -1,6 +1,11 @@
 <div class="div-login">
   <div class="form-grup"></div>
-
+  <div
+      class="alert alert-danger"
+      *ngIf="mensajeError">
+      {{ mensajeError }}
+    </div>
+      
   <form [formGroup]="loginForms" (ngSubmit)="onSubmit()">
     <div class="form-grup">
       <label for="exampleFormControlInput1" class="form-label">Email</label>
@@ -16,8 +21,8 @@
     <div
       class="alert alert-danger"
       *ngIf="loginForms.controls['email'].invalid && (loginForms.controls['email'].dirty || loginForms.controls['email'].touched)">
-      <li *ngIf="loginForms.controls['email'].hasError('required')">El campo es requerido</li>
-      <li *ngIf="loginForms.controls['email'].hasError('email')">Ingrese un email correcto</li>
+      <li class="validation" *ngIf="loginForms.controls['email'].hasError('required')">El campo es requerido</li>
+      <li class="validation" *ngIf="loginForms.controls['email'].hasError('email')">Ingrese un email correcto</li>
     </div>
     <div class="form-grup">
       <label for="exampleFormControlInput1" class="form-label">Password</label>
@@ -51,15 +56,13 @@
       </li>
 
     </div>
+
     
     <button type="submit" class="btn-login" 
       [disabled]="loginForms.invalid || loginForms.untouched"
       [title]="loginForms.invalid || loginForms.untouched ? 'Campos incompletos'
       : 'Campos incompletos'">
-      Inciar sesion
+      {{ textLogin }}
     </button>
   </form>
-  <div>
-
-  </div>
 </div>

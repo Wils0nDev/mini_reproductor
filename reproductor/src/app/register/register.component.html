@@ -1,10 +1,39 @@
-<div class="div-login register" >
+<div class="div-login register">
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
     <div class="form-grup"></div>
+    <div
+      class="alert alert-danger"
+      *ngIf="mensajeError">
+      {{ mensajeError }}
+    </div>
+    <div
+      class="alert alert-success"
+      *ngIf="mensajeSucces">
+      {{ mensajeSucces }}
+    </div>
+
     <div class="form-grup">
       <label for="nombres" class="form-label">Nombres</label>
-      <input type="text" class="form-control-login" id="nombres" placeholder="nombres" />
+      <input
+        type="text"
+        class="form-control-login"
+        id="nombres"
+        placeholder="nombres"
+        formControlName="name"
+        required
+        />
     </div>
-  
+    <div
+      class="alert alert-danger"
+      *ngIf="registerForm.controls['name'].invalid &&
+      (registerForm.controls['name'].dirty ||
+      registerForm.controls['name'].touched)">
+      <li class="validation"
+        *ngIf="registerForm.controls['name'].hasError('required')">
+        El campo es requerido
+      </li>
+    </div>
+
     <div class="form-grup">
       <label for="apellidos" class="form-label">Apellidos</label>
       <input
@@ -12,24 +41,90 @@
         class="form-control-login"
         id="apellidos"
         placeholder="apellidos"
-      />
+        formControlName="surname"
+        />
     </div>
-  
+    <div
+      class="alert alert-danger"
+      *ngIf="registerForm.controls['surname'].invalid &&
+      (registerForm.controls['surname'].dirty ||
+      registerForm.controls['surname'].touched)">
+      <li class="validation"
+        *ngIf="registerForm.controls['surname'].hasError('required')">
+        El campo es requerido
+      </li>
+    </div>
+
     <div class="form-grup">
-      <label for="email" class="form-label">Correo</label>
+      <label class="validation" for="email" class="form-label">Correo</label>
       <input
         type="email"
         class="form-control-login"
         id="email"
         placeholder="name@example.com"
-      />
+        formControlName="email"
+        />
+    </div>
+    <div
+      class="alert alert-danger"
+      *ngIf="registerForm.controls['email'].invalid &&
+      (registerForm.controls['email'].dirty ||
+      registerForm.controls['email'].touched)">
+      <li class="validation"
+        *ngIf="registerForm.controls['email'].hasError('required')">El campo es
+        requerido</li>
+      <li class="validation"
+        *ngIf="registerForm.controls['email'].hasError('email')">Ingrese un
+        email correcto</li>
     </div>
     <div class="form-grup">
-      <label for="password" class="form-label"
-        >Contraseña nueva</label
-      >
-      <input type="password" class="form-control-login" id="password" />
+      <label for="password" class="form-label">Contraseña nueva</label>
+      <input type="password" class="form-control-login" id="password"
+        formControlName="password" />
     </div>
-    <button type="submit" class="btn-login">Registrarte</button>
-  </div>
-  
+    <div
+      class="alert alert-danger"
+      *ngIf="registerForm.controls['password'].invalid &&
+      (registerForm.controls['password'].dirty ||
+      registerForm.controls['password'].touched)">
+
+      <li class="col validation"
+        [ngClass]="registerForm.controls['password'].hasError('required') ||
+        registerForm.controls['password'].hasError('minlength') ? 'text-danger'
+        : 'text-success'">
+        Minimo de 8 caracteres
+      </li>
+      <li class="col validation"
+        [ngClass]="registerForm.controls['password'].hasError('required') ||
+        registerForm.controls['password'].hasError('hasNumber') ? 'text-danger'
+        : 'text-success'">
+        ¡Debe contener al menos 1 número!
+      </li>
+      <li class="col validation"
+        [ngClass]="registerForm.controls['password'].hasError('required') ||
+        registerForm.controls['password'].hasError('hasCapitalCase') ?
+        'text-danger' : 'text-success'">
+        ¡Debe contener al menos 1 en mayúsculas!
+      </li>
+      <li class="col validation"
+        [ngClass]="registerForm.controls['password'].hasError('required') ||
+        registerForm.controls['password'].hasError('hasSmallCase') ?
+        'text-danger' : 'text-success'">
+        ¡Debe contener al menos 1 letra en minúscula!
+      </li>
+      <li class="col validation"
+        [ngClass]="registerForm.controls['password'].hasError('required') ||
+        registerForm.controls['password'].hasError('hasSpecialCharacters') ?
+        'text-danger' : 'text-success'">
+
+        ¡Debe contener al menos 1 personaje especial!
+      </li>
+
+    </div>
+    <button type="submit" class="btn-login" [disabled]="registerForm.invalid ||
+      registerForm.untouched"
+      [title]="registerForm.invalid || registerForm.untouched ? 'Campos
+      incompletos'
+      : 'Campos incompletos'">Registrarte</button>
+  </form>
+</div>

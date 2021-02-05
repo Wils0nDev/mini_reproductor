@@ -6,7 +6,7 @@ let Schema = moongose.Schema;
 let UserSchema = Schema({
     name : String,
     surname : String,
-    email: String,
+    email: { type: String, required: true, unique: true },
     password: String,
     role : String,
     image : String
