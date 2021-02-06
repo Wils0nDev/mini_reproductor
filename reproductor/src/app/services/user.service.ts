@@ -48,6 +48,23 @@ export class UserService {
     let headers  = new HttpHeaders(
       {'Content-Type': 'application/json',
         'Authorization': this.getToken() || ''
+       })
+
+
+    return this.httpClient.put<User>('http://localhost:3977/api/update-user/'+userUpdate._id,params,{ headers: headers})
+      .pipe(
+        catchError(this.mensajeError)
+      ) 
+  }
+
+  uploadImage(userUpdate : User) : Observable<User>{
+
+    
+    let json = JSON.stringify(userUpdate);
+    let params = json;
+    let headers  = new HttpHeaders(
+      {'Content-Type': 'application/json',
+        'Authorization': this.getToken() || ''
     })
 
     return this.httpClient.put<User>('http://localhost:3977/api/update-user/'+userUpdate._id,params,{ headers: headers})
@@ -63,9 +80,8 @@ export class UserService {
     }else{
       //status : obtenemos el codigo (404,etc), error : obtenemos el mensaje de lado del servidor
       //console.log('Error Status :', error.status)
-      if(error.status == 404){
         return throwError(error.error);
-      }
+      
     }
 
     //retornamos usando la estrategia de Catch y Rethrow : capturar y reelanzar

@@ -1,5 +1,5 @@
-import { Component, OnInit  } from '@angular/core';
-import { FormGroup,  Validators, FormControl } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { User } from '../models/usert';
 import { ValidacionesPersonlizadas } from '../utils/validaciones-personlizadas'
 import { UserService } from '../services/user.service';
@@ -21,9 +21,9 @@ export class LoginComponent implements OnInit {
   public token?: string | null;
   mensajeError!: string;
   loginForms!: FormGroup
-  textLogin! : string
-  
-  constructor(private userService: UserService, private router : Router, private appComponente : AppComponent) {
+  textLogin!: string
+
+  constructor(private userService: UserService, private router: Router, private appComponente: AppComponent) {
     this.user = new User('', '', '', '', '', 'ROLE_USER', '');
 
   }
@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
 
     this.formValidate();
     this.textLogin = "Inciar sesion"
-  
+
   }
 
   formValidate() {
@@ -92,15 +92,15 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (response) => {
           if (response.user) {
+
             let identity = {
-               _id: response.user._id,
+              _id: response.user._id,
               name: response.user.name,
               surname: response.user.surname,
               email: response.user.email,
-              password : '',
+              password: '',
               role: response.user.role,
               image: response.user.image,
-        
             }
             this.identity = JSON.stringify(identity);
             if (!identity._id) {
@@ -111,7 +111,7 @@ export class LoginComponent implements OnInit {
                 (response) => {
                   let token = response.token
                   this.token = token;
-                  
+
                   if (this.token !== undefined) {
                     if (this.token.length <= 0) {
                       alert('El token no se ha podido generar correctamente');

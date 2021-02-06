@@ -110,7 +110,15 @@ function loginUser(req, res){
 function updateUser(req, res){
 
     let userId = req.params.id;
-    let update = req.body;
+    let update;
+    //esto es para que el usuario no tenga permiso de actulizar otro usuario
+   if(userId != req.user.sub){
+        return res.status(500).send({ message : "No tienes permiso para actulizar el usuario" })
+    }
+    update = {
+        name : req.body.name,
+        surname : req.body.surname
+    }
 
     User.findByIdAndUpdate(userId, update,{useFindAndModify: false}, (err, userUpdated) => {
         if(err){
@@ -119,7 +127,13 @@ function updateUser(req, res){
             if(!userUpdated){
                 res.status(401).send({ message : "No se ha podido actulizar el usuario"});
             }else{
-                res.status(200).send({ user : userUpdated});
+                res.status(200).send({ user : {
+                    _id : userUpdated._id,
+                    name : userUpdated.name,
+                    surname : userUpdated.surname,
+                    email : userUpdated.surname,
+                    image : userUpdated.image
+                }});
             }
         }
     })
@@ -137,9 +151,8 @@ function uploadImage(req, res){
         let file_name = file_split[2];
 
         let file_ext = file_name.split('.');
-
-        if(file_ext[1] == 'png' || file_ext == 'jpg' || file_ext[1] == 'gif'){
-            User.findByIdAndUpdate(userId, {image: file_name}, (err, userUpdated) => {
+        if(file_ext[1] == 'png' || file_ext[1] == 'jpg' || file_ext[1] == 'gif'){
+            User.findByIdAndUpdate(userId, {image: file_name},{useFindAndModify: false}, (err, userUpdated) => {
                 if(!userUpdated){
                     res.status(401).send({ message : "No se ha podido actulizar el usuario"});
                 }else{
