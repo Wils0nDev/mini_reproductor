@@ -7,17 +7,20 @@ import { UserComponent } from './user.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators'; // <-- #2 import module
-
+import { MaterialModule } from '../material/material.module'; // <-- #2 import module
+import { ToolbarComponent } from '../toolbar/toolbar.component';
+import { SidenavComponent } from '../sidenav/sidenav.component';
 
 
 @NgModule({
-  declarations: [EditComponent, UserComponent,PerfilComponent],
+  declarations: [EditComponent, UserComponent,PerfilComponent,ToolbarComponent, SidenavComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    RxReactiveFormsModule
+    RxReactiveFormsModule,
+    MaterialModule
   ]
 })
 export class UserModule { }

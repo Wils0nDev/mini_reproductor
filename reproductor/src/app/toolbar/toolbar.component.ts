@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'wr-toolbar',
@@ -7,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ToolbarComponent implements OnInit {
 
+  @Input()
+  sidenav! : MatSidenav;
+  
   constructor() { }
 
   ngOnInit(): void {
