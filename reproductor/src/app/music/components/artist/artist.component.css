@@ -1,0 +1,14 @@
+table {
+    width: 100%;
+  }
+  
+  
+  .button-table{
+      display: flex;
+      justify-content: flex-end;
+  }
+
+  button{
+    margin: 16px 8px;   
+    
+  }

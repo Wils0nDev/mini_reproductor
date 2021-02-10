@@ -1,22 +1,63 @@
 
-<div class="container-fluid">
-    <div *ngIf="identity">
-        {{ title }}
-        <a (click)='cerrarSesion()' href="./"> Cerrar sesión</a>
+<mat-sidenav-container fullscreen>
+  <mat-sidenav #sidenav>
+
+    <aside id="aside">
+
+      <div class="img-perfil" style="background-image:
+        url(assets/images/fondo.png);">
+        <a href="#" class="img logo rounded-circle mb-5"
+          style="background-image: url(assets/images/perfil.png);">
+        </a>
+        <h2>Wilson Vasquez Coronado </h2>
+      </div>
+
+      <ul>
+        <li>
+          <a href="#">Webs</a>
+        </li>
+        <li>
+          <a href="#">Apps</a>
+        </li>
+        <li>
+          <a href="#">Diseños</a>
+        </li>
+        <li>
+          <a href="#">Otros</a>
+        </li>
+      </ul>
+    </aside>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+
+      <button mat-icon-button aria-label="Example icon-button with menu icon"
+        (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>Portafolio</span>
+
+      <span class="toolbar-space"></span>
+
+      <button mat-icon-button [matMenuTriggerFor]="Matmenu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #Matmenu>
+
+        <button *ngIf="!identity" mat-menu-item [routerLink]="['/','login']">
+          Login/Register
+        </button>
+        <button *ngIf="identity" mat-menu-item (click)='cerrarSesion()'>
+          Cerrar sesión
+        </button>
+
+      </mat-menu>
+    </mat-toolbar>
+
+      <div>
+
         <router-outlet></router-outlet>
-    </div>
-</div>
-<section *ngIf="!identity" class="container-login center-h center-v">
-    <div class="div-action-login">
-        <div class="form-grup-aciton">
-            <button type="submit" class="btn-login btn-aciton"
-                (click)="mostrarLogin()">Login</button>
-            <button type="submit" class="btn-login btn-aciton" id="btnRegister"
-                (click)="mostrarRegistro()">Register</button>
-        </div>
+      </div>
 
-
-        <wr-login *ngIf="mostrar != 1"></wr-login>
-        <wr-register *ngIf="mostrar == 1"></wr-register>
-    </div>
-</section>
+  </mat-sidenav-content>
+</mat-sidenav-container>

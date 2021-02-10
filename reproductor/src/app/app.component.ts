@@ -4,6 +4,7 @@ import { User } from './models/usert';
 import { RegisterComponent } from './register/register.component';
 import { UserService } from './services/user.service';
 import {  Router } from '@angular/router';
+import { ToolbarComponent } from './toolbar/toolbar.component';
 
 
 @Component({
@@ -21,17 +22,19 @@ export class AppComponent {
   register! : RegisterComponent;
   mostrar! : number
 
-  constructor(private userService: UserService, private router: Router){
+  constructor( private userService : UserService){
   }
 
   ngOnInit(): void {
+    
+
     if(this.userService.getIdentity()?.length != undefined){
       this.identity = this.userService.getIdentity();
     }else{
       this.identity = null;
 
     }
-    this.token = this.userService.getToken();
+    
   }
 
   mostrarRegistro() {
@@ -46,6 +49,11 @@ export class AppComponent {
 
   cerrarSesion(){
     this.userService.logout()
+    this.ngOnInit();
+    //this.router.navigate(['/'])
   }
+
+
+  
 
 }

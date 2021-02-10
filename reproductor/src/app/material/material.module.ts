@@ -21,6 +21,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 
@@ -49,7 +50,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatRadioModule,
     MatSliderModule,
     MatTabsModule,
-    MatListModule
+    MatListModule,
+    MatDialogModule
   ],
   exports : [
     MatButtonModule,
@@ -73,7 +75,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatRadioModule,
     MatSliderModule,
     MatTabsModule,
-    MatListModule
+    MatListModule,
+    MatDialogModule
   ]
 })
 export class MaterialModule { }

@@ -6,6 +6,7 @@ import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { catchError } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
 import { GLOBAL } from '../../../services/global'
+import { Router } from '@angular/router';
 @Component({
   selector: 'wr-edit',
   templateUrl: './edit.component.html',
@@ -23,20 +24,24 @@ export class EditComponent implements OnInit {
   mensajeSucces: string | undefined;
   public filesToUpload!: Array<File>
   public url!: string;
-  public imagePergil! : string
+  public imagePergil!: string
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private router: Router) {
     this.userUpdate = new User('', '', '', '', '', 'ROLE_USER', '');
     this.extensions = ["png", "jpg", "jpge"]
     this.url = GLOBAL.url;
   }
 
   ngOnInit(): void {
+
     this.token = this.userService.getToken();
+    if (this.token == null) {
+      this.router.navigate(['/login']);
+    }
     this.userUpdate = JSON.parse(this.userService.getIdentity() || '{}');
-    if(this.userUpdate.image != 'null'){
-      this.imagePergil = GLOBAL.image+this.userUpdate.image
-    }else{
+    if (this.userUpdate.image != 'null') {
+      this.imagePergil = GLOBAL.image + this.userUpdate.image
+    } else {
       this.imagePergil = '';
     }
     this.formValidate();
@@ -119,16 +124,16 @@ export class EditComponent implements OnInit {
 
               this.makeFileRequest(this.url + 'upload-image/' + response.user._id, [], this.filesToUpload)
                 .then(
-                  (result:any) => {
-                    
-                    if(response.user) { 
-                      response.user.image = result.image 
-                      this.imagePergil =  GLOBAL.image + response.user.image;
+                  (result: any) => {
+
+                    if (response.user) {
+                      response.user.image = result.image
+                      this.imagePergil = GLOBAL.image + response.user.image;
                     }
-                    
+
                     let user: string | null = JSON.stringify(response.user)
                     localStorage.setItem('identity', JSON.stringify(user))
-                    
+
 
                   })
             }

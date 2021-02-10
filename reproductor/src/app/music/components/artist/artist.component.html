@@ -1,0 +1,59 @@
+<div class="row">
+  <li *ngIf="animal">
+    You chose: <i>{{name}}</i>
+  </li>
+  <div class="button-table">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="openDialog()"
+    >
+      +
+    </button>
+  </div>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+    <!-- Position Column -->
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef>Descripción</th>
+      <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="image">
+      <th mat-header-cell *matHeaderCellDef>Image</th>
+      
+      <td mat-cell *matCellDef="let element" >
+        <img
+          mat-card-image
+          [src]=" element.image != 'null' ? imageArtist + element.image : '' "
+          [width]="100"
+          style="padding: 10px"
+        />
+        
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="accion">
+      <th mat-header-cell *matHeaderCellDef>Accion</th>
+      
+      <td mat-cell *matCellDef="let element" >
+        <span class="span-edit" style="float: left;" ><i class="fa fa-edit"></i></span>
+        <span class="span-delete" style="float: right;"><i class="fa fa-trash"></i></span>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+  
+</div>

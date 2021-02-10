@@ -3,6 +3,7 @@ import { Observable,Observer, pipe, throwError } from 'rxjs';
 import { User } from '../models/usert';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http'
 import { catchError } from 'rxjs/operators'
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
@@ -108,6 +109,7 @@ export class UserService {
       this.token = token
     }else{
       this.token = null
+      
     }
 
     return this.token;

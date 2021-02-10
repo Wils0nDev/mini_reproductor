@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { User } from '../models/usert';
 import { ValidacionesPersonlizadas } from '../utils/validaciones-personlizadas'
@@ -7,6 +7,7 @@ import { EMPTY } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { AppComponent } from '../app.component'
+import { ToolbarComponent } from '../toolbar/toolbar.component';
 
 
 @Component({
@@ -32,6 +33,7 @@ export class LoginComponent implements OnInit {
 
     this.formValidate();
     this.textLogin = "Inciar sesion"
+    
 
   }
 
@@ -118,7 +120,8 @@ export class LoginComponent implements OnInit {
                     } else {
                       localStorage.setItem('token', this.token)
                       this.user = new User('', '', '', '', '', 'ROLE_USER', '');
-                      this.appComponente.ngOnInit();
+                     this.appComponente.ngOnInit();
+                      this.router.navigate(['/'])
                     }
                   }
 
@@ -134,6 +137,7 @@ export class LoginComponent implements OnInit {
 
   }
 
+  
 
 
 }

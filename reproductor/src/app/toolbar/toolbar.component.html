@@ -11,11 +11,13 @@
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #Matmenu>
-       <button mat-menu-item [routerLink]="['/admin','login']" >
+        
+       <button *ngIf="!menu" mat-menu-item [routerLink]="['/','login']" >
             Login/Register
         </button>
+        <button *ngIf="menu" mat-menu-item (click)='cerrarSesion()'  >
+          Cerrar sesión
+       </button>
         
-      </mat-menu>
-     
-      
+      </mat-menu>     
 </mat-toolbar>

@@ -26,7 +26,6 @@ app.use((req, res, next) => {
 });
 
 //ruta base
-
 app.use('/api', user_routes);
 app.use('/api', artist_routes);
 app.use('/api', albun_routes);

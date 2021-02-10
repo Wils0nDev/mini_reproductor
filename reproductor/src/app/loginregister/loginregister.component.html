@@ -1,0 +1,12 @@
+<section class="container-login center-h center-v">
+    <div class="div-action-login">
+        <div class="form-grup-aciton">
+            <button type="submit" class="btn-login btn-aciton"
+                (click)="mostrarLogin()">Login</button>
+            <button type="submit" class="btn-login btn-aciton" id="btnRegister"
+                (click)="mostrarRegistro()">Register</button>
+        </div>
+        <wr-login *ngIf="mostrar != 1"></wr-login>
+        <wr-register *ngIf="mostrar == 1"></wr-register>
+    </div>
+</section>

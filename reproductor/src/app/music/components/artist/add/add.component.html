@@ -1,0 +1,64 @@
+<form [formGroup]="addArtistForm" >
+  <h1 mat-dialog-title>¿Artista?</h1>
+  
+  <div mat-dialog-content>
+    <div class="alert alert-danger" *ngIf="messageError">
+      {{ messageError }}
+    </div>
+    <div class="alert alert-success" *ngIf="mensajeSucces">
+      {{ mensajeSucces }}
+    </div>
+    <mat-form-field>
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="name" required />
+    </mat-form-field>
+    <div
+      class="alert alert-danger"
+      *ngIf="
+        addArtistForm.controls['name'].invalid &&
+        (addArtistForm.controls['name'].dirty ||
+          addArtistForm.controls['name'].touched)
+      "
+    >
+      <li
+        class="validation"
+        *ngIf="addArtistForm.controls['name'].hasError('required')"
+      >
+        El campo es requerido
+      </li>
+    </div>
+    <mat-form-field>
+      <mat-label>Descripcion</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+    </mat-form-field>
+    <div class="form-group">
+      <input type="file" 
+      class="form-control-file" 
+      id="imagenArtist"
+      formControlName="image"
+        (change)="filesChangeEvent($event)" 
+      
+      />
+    </div>
+    <div
+        class="alert alert-danger"
+        *ngIf="
+          addArtistForm.controls['image'].invalid &&
+          (addArtistForm.controls['image'].dirty ||
+            addArtistForm.controls['image'].touched)
+        "
+      >
+        
+        <li
+          class="validation"
+          *ngIf="addArtistForm.controls['image'].hasError('extension')"
+        >
+          {{ extensions }}
+        </li>
+      </div>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancelar</button>
+    <button mat-button  cdkFocusInitial (click)="onSubmit()">Agregar</button>
+  </div>
+</form>

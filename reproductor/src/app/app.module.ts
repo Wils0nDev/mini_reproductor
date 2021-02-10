@@ -8,14 +8,21 @@ import { RegisterComponent } from './register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // <-- #2 import module
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginregisterComponent } from './loginregister/loginregister.component'; // <-- #2 import module
+import { MaterialModule } from './material/material.module';
+import { ToolbarComponent } from './toolbar/toolbar.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
+import { ArtistComponent } from './music/components/artist/artist.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    LoginregisterComponent,
+    ToolbarComponent, 
+    SidenavComponent
   ],
   imports: [
     BrowserModule,
@@ -24,9 +31,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
     ReactiveFormsModule,
     HttpClientModule,
     RxReactiveFormsModule,
-    BrowserAnimationsModule
-  ],
-  providers: [],
+    BrowserAnimationsModule,
+    MaterialModule  ],
+  providers: [ArtistComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

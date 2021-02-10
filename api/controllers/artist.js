@@ -58,8 +58,31 @@ function getArtist(req, res){
     
 }
 
-
 function getAllArtist(req, res){
+
+
+    Artist.find((err,artists, total)=>{
+        if(err){
+            res.status(500).send({message:"Error en la petición"});
+        }else{
+            if(!artists){
+                res.status(404).send({message : "No hay artistas"})
+
+            }else{
+                res.status(200).send({
+                    total_items : total,
+                    artist : artists
+                });  
+
+            }
+        }
+    } );
+  
+
+    
+}
+
+function getArtistPage(req, res){
 
     //numero de pagina, no de elementos
     if(req.params.page){
@@ -215,5 +238,6 @@ module.exports = {
     updateArtist,
     deleteArtist,
     uploadImage,
-    getImageFile
+    getImageFile,
+    getArtistPage
 }
