@@ -19,7 +19,7 @@ import { MatTable } from '@angular/material/table';
 })
 export class ArtistComponent implements OnInit {
 
-  public dataSource: Artist[] = [];
+  public dataSource: Array<any> = [];
   public artist! : Artist;
   public name! : string
   public addArtistForm!: FormGroup
@@ -30,7 +30,8 @@ export class ArtistComponent implements OnInit {
   animal: any;
   //dataSource = ELEMENT_DATA;
   constructor(public dialog: MatDialog,private artistService : ArtistService ) {
-            this.imageArtist = GLOBAL.imageArtist 
+            this.dataSource = [] 
+            this.imageArtist = GLOBAL.imageArtist
 
    }
 
@@ -43,9 +44,9 @@ export class ArtistComponent implements OnInit {
        return EMPTY
      })
     ).subscribe(
-      response => {
-        this.dataSource = response.artist
-
+      response  => {
+        console.log('eweq')
+        this.dataSource.push(response.artist)
       }
     )
   }
@@ -58,12 +59,13 @@ export class ArtistComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.agregar(result.artist); // Pizza!
+      console.log(result)
+      this.agregar(result);
     });
   }
 
-  agregar(art: Artist) {
-    this.dataSource.push(art);
+  agregar(art: any) {
+    this.dataSource[0].push(art.artist);
     this.tableArtist.renderRows();
   }
 

@@ -14,27 +14,27 @@ export class ArtistService {
 
   constructor(private httpCliente : HttpClient, private userService : UserService) { }
 
-  saveArtist(artist : Artist): Observable<Artist>{
+  saveArtist(artist : Artist): Observable<any>{
 
     let params : Artist = artist
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': this.userService.getToken() || ''})
 
-    return this.httpCliente.post<Artist>(GLOBAL.url + 'artist-add',params, {headers : headers})
+    return this.httpCliente.post<any>(GLOBAL.url + 'artist-add',params, {headers : headers})
     .pipe(
       catchError(this.messageError)
     )
 
   }
 
-  getArtist(): Observable<Artist>{
+  getArtist() : Observable<any>{
 
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': this.userService.getToken() || ''})
 
-    return this.httpCliente.get<Artist>(GLOBAL.url + 'artists/',{headers: headers})
+    return this.httpCliente.get<any>(GLOBAL.url + 'artistss/',{headers: headers})
     .pipe(
       catchError(this.messageError)
     )

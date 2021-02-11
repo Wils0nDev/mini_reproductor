@@ -5,6 +5,7 @@ import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { EMPTY } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ArtistService } from 'src/app/services/artist.service';
+import { GLOBAL } from 'src/app/services/global';
 import { UserService } from 'src/app/services/user.service';
 import { Artist } from '../../../../models/artist'
 import { ArtistComponent } from '../artist.component';
@@ -22,6 +23,8 @@ export class AddComponent implements OnInit {
   public token!: string | null
   public messageError! : string
   public mensajeSucces! : string
+  public url!: string;
+
 
   constructor(
     public dialogRef: MatDialogRef<AddComponent>,
@@ -34,6 +37,7 @@ export class AddComponent implements OnInit {
      
       this.extensions = ["png", "jpg", "jpge"]
       this.token = this.userService.getToken();
+      this.url = GLOBAL.url;
 
      }
 
@@ -82,7 +86,24 @@ export class AddComponent implements OnInit {
     .subscribe(
       (response)=> {
         this.mensajeSucces = 'Se registro correctamente'
-        this.dialogRef.close(response);
+
+        if (response) {
+          if (this.filesToUpload) {
+            console.log(this.url + 'upload-image-artist/' + response.artist._id);
+            this.makeFileRequest(this.url + 'upload-image-artist/' + response.artist._id, [], this.filesToUpload)
+              .then(
+                (result: any) => {
+                  console.log(result)
+                  if (response.artist) {
+                    response.artist.image = result.image
+                    this.dialogRef.close(response);
+                  }
+                })
+          }
+
+          this.dialogRef.close(response);
+
+        }
 
         //this.data = response
         //this.artistComponent.ngOnInit()

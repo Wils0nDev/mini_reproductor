@@ -5,6 +5,8 @@ export class Artist {
         public name : string,
         public description : string,
         public image: string,
-        public artist: Artist[]
+        //public artist?: Artist
     ) { }
+
+
 }

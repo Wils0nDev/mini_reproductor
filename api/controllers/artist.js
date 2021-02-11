@@ -70,7 +70,6 @@ function getAllArtist(req, res){
 
             }else{
                 res.status(200).send({
-                    total_items : total,
                     artist : artists
                 });  
 
@@ -206,7 +205,7 @@ function uploadImage(req, res){
                 if(!artistUpdate){
                     res.status(401).send({ message : "No se ha podido actulizar el artista"});
                 }else{
-                    res.status(200).send({ artist : artistUpdate});
+                    res.status(200).send({ artist : artistUpdate, image: file_name});
                 } 
             });
         }else{

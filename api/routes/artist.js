@@ -15,7 +15,7 @@ let md_upload = multipart({ uploadDir : './uploads/artist'});
 
 
 
-api.get('/artists/',md_auth.ensureAuth,ArtistController.getAllArtist);
+api.get('/artistss/',md_auth.ensureAuth,ArtistController.getAllArtist);
 api.get('/artists/:page?',md_auth.ensureAuth,ArtistController.getArtistPage);
 api.get('/artist/:id',md_auth.ensureAuth,ArtistController.getArtist);
 api.post('/artist-add',md_auth.ensureAuth,ArtistController.saveArtist);
