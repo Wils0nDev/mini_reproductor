@@ -59,15 +59,28 @@ export class ArtistComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result)
       this.agregar(result);
     });
   }
 
   agregar(art: any) {
-    this.dataSource[0].push(art.artist);
-    this.tableArtist.renderRows();
+    if(art){
+      this.dataSource[0].push(art.artist);
+      this.tableArtist.renderRows();
+    }
+    
   }
 
+  editarArtist(artist : Artist){
+    const dialogRef = this.dialog.open(AddComponent, {
+      width: '250px',
+      data: artist
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result)
+      this.agregar(result);
+    });
+  }
 }
 

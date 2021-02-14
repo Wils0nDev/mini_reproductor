@@ -35,6 +35,7 @@ export class AddComponent implements OnInit {
     private artistComponent : ArtistComponent
     ) {
      
+      this.artist = new Artist('','','','')
       this.extensions = ["png", "jpg", "jpge"]
       this.token = this.userService.getToken();
       this.url = GLOBAL.url;
@@ -42,17 +43,24 @@ export class AddComponent implements OnInit {
      }
 
   ngOnInit(): void {
+    
+
+    if (this.data != undefined) {
+      this.artist = this.data
+    } 
+    console.log(this.artist)
     this.formValidate()
     
 
   }
 
   formValidate() {
+    
     this.addArtistForm = new FormGroup({
-      name: new FormControl('',[
+      name: new FormControl(this.artist.name,[
         RxwebValidators.required()
       ]),
-      description: new FormControl('',[
+      description: new FormControl(this.artist.description,[
       ]),
       image: new FormControl('', [
         //Validators.required,
@@ -141,5 +149,9 @@ export class AddComponent implements OnInit {
       xhr.send(formData)
     })
   }
+
+
+  /* Editar un artista */
+  
 
 }
