@@ -28,6 +28,20 @@ export class ArtistService {
 
   }
 
+  updateArtist(artist : Artist): Observable<any>{
+
+    let params : Artist = artist
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.userService.getToken() || ''})
+
+    return this.httpCliente.put<any>(GLOBAL.url + 'artist-add',params, {headers : headers})
+    .pipe(
+      catchError(this.messageError)
+    )
+
+  }
+
   getArtist() : Observable<any>{
 
     let headers = new HttpHeaders({

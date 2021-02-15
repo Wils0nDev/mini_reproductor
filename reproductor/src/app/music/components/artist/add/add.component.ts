@@ -24,6 +24,7 @@ export class AddComponent implements OnInit {
   public messageError! : string
   public mensajeSucces! : string
   public url!: string;
+  public option! : string;
 
 
   constructor(
@@ -47,7 +48,10 @@ export class AddComponent implements OnInit {
 
     if (this.data != undefined) {
       this.artist = this.data
-    } 
+      this.option = 'Actulizar'
+    }else{
+      this.option = 'Agregar'
+    }
     this.formValidate()
     
 
@@ -77,10 +81,20 @@ export class AddComponent implements OnInit {
   }
   
   onSubmit(){
+    if(this.option === 'Agregar'){
+
     this.artist = this.addArtistForm.value;
     this.saveArtist(this.artist);
+
+    }else{
+      this.artist = this.addArtistForm.value;
+      this.updateArtist(this.artist);
+    }
   }
 
+  updateArtist(artist : Artist){
+    console.log(artist)
+  }
   saveArtist(artist : Artist){
 
     this.artistService.saveArtist(artist)

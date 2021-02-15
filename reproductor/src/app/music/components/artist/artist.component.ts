@@ -53,11 +53,11 @@ export class ArtistComponent implements OnInit {
     )
   }
 
-  
+  //Abrir modal add 
   openDialog(){
     const dialogRef = this.dialog.open(AddComponent, {
       width: '250px',
-      data: this.artist
+      data: this.artist,
     });
 
     dialogRef.afterClosed().subscribe(result => {
