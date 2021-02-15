@@ -48,7 +48,6 @@ export class AddComponent implements OnInit {
     if (this.data != undefined) {
       this.artist = this.data
     } 
-    console.log(this.artist)
     this.formValidate()
     
 

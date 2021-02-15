@@ -8,7 +8,8 @@ import { Artist } from 'src/app/models/artist';
 import { GLOBAL } from 'src/app/services/global';
 import { FormControl, FormGroup } from '@angular/forms';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
-import { MatTable } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
+import {MatSort} from '@angular/material/sort';
 
 
 
@@ -19,15 +20,15 @@ import { MatTable } from '@angular/material/table';
 })
 export class ArtistComponent implements OnInit {
 
-  public dataSource: Array<any> = [];
+  public dataSource! : Array<any>;
   public artist! : Artist;
   public name! : string
   public addArtistForm!: FormGroup
   @ViewChild(MatTable) tableArtist!: MatTable<Artist>;
+  @ViewChild(MatSort) sort!: MatSort;
 
-  displayedColumns: string[] = [ 'name', 'description', 'image', 'accion'];
+  displayedColumns: string[] = [ 'position', 'name', 'description', 'image', 'accion'];
   public imageArtist!: string
-  animal: any;
   //dataSource = ELEMENT_DATA;
   constructor(public dialog: MatDialog,private artistService : ArtistService ) {
             this.dataSource = [] 
@@ -45,8 +46,9 @@ export class ArtistComponent implements OnInit {
      })
     ).subscribe(
       response  => {
-        console.log('eweq')
-        this.dataSource.push(response.artist)
+        //this.dataSource.push(response.artist);
+        this.dataSource[0] = new MatTableDataSource(response.artist);
+        this.dataSource[0].sort = this.sort;
       }
     )
   }
@@ -65,8 +67,9 @@ export class ArtistComponent implements OnInit {
 
   agregar(art: any) {
     if(art){
-      this.dataSource[0].push(art.artist);
-      this.tableArtist.renderRows();
+    this.dataSource[0].data.push(art.artist);
+    this.dataSource[0].sort = this.sort;
+
     }
     
   }
